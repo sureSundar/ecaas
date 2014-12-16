@@ -1,0 +1,23 @@
+<h1>Listing users</h1>
+<% if notice %>
+<p id="notice" ><%= notice %></p>
+<% end %>
+<table>
+<tr>
+<th>Name</th>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+<% @users.each do |user| %>
+<tr>
+<td><%= user.name %></td>
+<td><%= link_to 'Show' , account_user_path(id: user.id) %></td>
+<td><%= link_to 'Edit' , edit_account_user_path(id: user.id) %></td>
+<td><%= link_to 'Destroy' , account_user_path(id: user.id), :confirm => 'Are you sure?' ,
+:method => :delete %></td>
+</tr>
+<% end %>
+</table>
+<br />
+<%= link_to 'New User' , new_account_user_path %>

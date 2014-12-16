@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @product.title %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @product.description %>
+</p>
+
+<p>
+  <strong>Image url:</strong>
+  <%= @product.image_url %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+<p>
+  <strong>Store:</strong>
+  <%= @product.store %>
+</p>
+
+<%= link_to 'Edit', edit_account_store_product_path(id: params[:id],store_id: params[:store_id],account_id: params[:account_id]) %> |
+<%= link_to 'Back', account_store_products_path(store_id: @product.store.id,account_id: @product.store.account.id) %>

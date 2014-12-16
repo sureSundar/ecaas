@@ -1,0 +1,33 @@
+<h1>Listing stores</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Description</th>
+      <th>Account</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @stores.each do |store| %>
+      <tr>
+        <td><%= store.name %></td>
+        <td><%= store.description %></td>
+        <td><%= store.account %></td>
+        <td><%= link_to 'Show', account_store_path(id: store.id) %></td>
+        <td><%= link_to 'Edit', edit_account_store_path(id: store.id) %></td>
+        <td><%= link_to 'Destroy', account_store_path(id: store.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to 'Product Mgmt', account_store_products_path(store_id: store.id,account_id: store.account.id) %></td>
+		<td><%= link_to 'Shop Around', account_store_products_path(store_id: store.id,account_id: store.account.id) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Store', new_account_store_path %>
