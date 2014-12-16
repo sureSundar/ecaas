@@ -43,4 +43,12 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
-gem 'activeadmin', :git => 'https://github.com/activeadmin/activeadmin.git'
+
+#gem 'arbre', :git => 'https://github.com/activeadmin/arbre.git'
+#gem 'devise', :git => 'https://github.com/plataformatec/devise.git'
+#gem 'formtastic', :git => 'https://github.com/justinfrench/formtastic.git'
+#gem 'open-iconic', :git => 'https://github.com/iconic/open-iconic.git'
+#gem 'inherited_resources', :git => 'https://github.com/josevalim/inherited_resources.git'
+#gem 'kaminari', :git => 'https://github.com/amatsuda/kaminari.git'
+#gem 'ransack', :git => 'https://github.com/activerecord-hackery/ransack.git'
+#gem 'activeadmin', :git => 'https://github.com/activeadmin/activeadmin.git'

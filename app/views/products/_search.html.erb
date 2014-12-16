@@ -1,9 +1,63 @@
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
+<script src="http://twitter.github.io/typeahead.js/releases/latest/typeahead.bundle.js"></script>
+<script src="http://twitter.github.io/typeahead.js/js/handlebars.js"></script>
+<script>
+$(document).ready(function() {
+
+// the basics
+// ----------
+
+var substringMatcher = function(strs) {
+  return function findMatches(q, cb) {
+    var matches, substringRegex;
+
+    // an array that will be populated with substring matches
+    matches = [];
+
+    // regex used to determine if a string contains the substring `q`
+    substrRegex = new RegExp(q, 'i');
+
+    // iterate through the pool of strings and for any string that
+    // contains the substring `q`, add it to the `matches` array
+    $.each(strs, function(i, str) {
+      if (substrRegex.test(str)) {
+        // the typeahead jQuery plugin expects suggestions to a
+        // JavaScript object, refer to typeahead docs for more info
+        matches.push({ value: str });
+      }
+    });
+
+    cb(matches);
+  };
+};
+
+var states = [
+	<% @products.each do |product| %>
+	'<%= product.title %>',
+	 <% end %>
+];
+
+$('#the-basics .typeahead').typeahead({
+  hint: true,
+  highlight: true,
+  minLength: 1
+},
+{
+  name: 'states',
+  displayKey: 'value',
+  source: substringMatcher(states)
+});
+});
+</script>
+<div class="example" id="the-basics">
 <%= form_tag("/search", method: "post") do %>
   <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
-  <%= hidden_field_tag(:account_id, params[:account_id]) %>
-  <%= hidden_field_tag(:store_id, params[:store_id]) %>
-  <%= submit_tag("Search") %>
+      <div class="demo">
+	  <%= text_field_tag(:q,nil,{class: 'typeahead', placeholder: 'Search Anything...'}) %>
+	  <%= hidden_field_tag(:account_id, params[:account_id]) %>
+	  <%= hidden_field_tag(:store_id, params[:store_id]) %>
+	  <%= submit_tag("Search") %>
+       </div>
 <% end %>
 
