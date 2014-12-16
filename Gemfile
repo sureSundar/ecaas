@@ -43,3 +43,4 @@ end
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+gem 'activeadmin', :git => 'https://github.com/activeadmin/activeadmin.git'

@@ -1,9 +1,11 @@
-
 <%= form_tag("/search", method: "post") do %>
-  <%= label_tag(:q, "Search for:") %>
-  <%= text_field_tag(:q) %>
+  <td>  <%= text_field_tag(:q) %> </td>
+  <td>  <%= text_field_tag(:q_desc) %> </td>
+  <td>  <%= text_field_tag(:q_image) %> </td>
+  <td>  <%= text_field_tag(:q_price) %> </td>
+  <td>  <%= text_field_tag(:q_store) %> </td>
   <%= hidden_field_tag(:account_id, params[:account_id]) %>
   <%= hidden_field_tag(:store_id, params[:store_id]) %>
-  <%= submit_tag("Search") %>
+  <td><%= submit_tag("Apply Filter") %></td>
 <% end %>
 

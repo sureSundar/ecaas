@@ -16,8 +16,12 @@
 
   <tbody>
      <tr>
+	<%= render 'search' %>	    
+     </tr>
+     <tr>
 	<%= render 'filter' %>	    
-	</tr>
+     </tr>
+
 	<% @products.each do |product| %>
       <tr>
         <td><%= product.title %></td>

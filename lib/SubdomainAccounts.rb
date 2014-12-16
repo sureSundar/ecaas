@@ -31,6 +31,7 @@
 
       def account_subdomain
         request.subdomains.first || ''
+
       end
 
       def default_account_url( use_ssl = request.ssl? )
@@ -38,7 +39,8 @@
       end
 
       def current_account
-        Account.find_by_subdomain(account_subdomain)
+        #Account.find_by_subdomain(account_subdomain)
+	Account.find_by_id(params[:account_id])
       end
 
       def http_protocol( use_ssl = request.ssl? )

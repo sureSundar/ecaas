@@ -3,6 +3,7 @@
 <head>
   <title>Ecaas</title>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag 	 "depot" , :media => "all" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= csrf_meta_tags %>
 </head>
@@ -11,12 +12,30 @@
 <%
 	if (session[:user_id] != nil)
 %>
-		<h4> <%= User.find(session[:user_id]).name %> </h4> <hr/>
-<%	
+		<h4> Account : <%= current_account.subdomain %> 
+			| User 	 : <%= User.find(session[:user_id]).name %>
+			| <%= link_to 'logout', logout_path, method: :delete, data: { confirm: 'Are you sure?' } %>
+		</h4>	
+		<hr/>
+<%
 	end
 %>
-<h3>Welcome to your Promo ECAAS World</h3>
-<%= yield %>
-
+<h3>Welcome to your Real ECAAS World</h3>
+<div>
+       <p class="notice"><%= notice %></p>
+       <p class="alert"><%= alert %></p>
+</div>
+<div id="columns" >
+	<div id="side" >
+		<div id="cart" >
+		<% if @cart!=nil %>
+			<%= render @cart %>
+		<% end %>
+		</div>
+		<div id="main" >
+			<%= yield %>
+		</div>	
+	</div>
+</div>
 </body>
 </html>
