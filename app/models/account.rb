@@ -7,6 +7,7 @@ class Account < ActiveRecord::Base
 	
 	has_many :stores
 	has_many :users
+	accepts_nested_attributes_for :stores, allow_destroy: true
     protected
       def downcase_subdomain
         self.subdomain.downcase! if attribute_present?("subdomain")

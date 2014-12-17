@@ -51,4 +51,5 @@ end
 #gem 'inherited_resources', :git => 'https://github.com/josevalim/inherited_resources.git'
 #gem 'kaminari', :git => 'https://github.com/amatsuda/kaminari.git'
 #gem 'ransack', :git => 'https://github.com/activerecord-hackery/ransack.git'
-#gem 'activeadmin', :git => 'https://github.com/activeadmin/activeadmin.git'
+gem 'activeadmin', github: 'activeadmin'
+gem 'devise'

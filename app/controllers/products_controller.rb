@@ -9,7 +9,7 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = current_account.stores.find(params[:store_id]).products.where("title like ?","%#{params[:q]}%").all
+    @products = current_account.stores.find(params[:store_id]).products.where("title like ?","%#{params[:srch]}%").all
 	#where("title = ?",params[:q]).load
 	@cart = current_cart
 	render "products/index"	
