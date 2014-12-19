@@ -9,10 +9,17 @@ class ProductsController < ApplicationController
   end
 
   def search
-    @products = current_account.stores.find(params[:store_id]).products.where("title like ?","%#{params[:srch]}%").all
+    #@products = current_account.stores.find(params[:store_id]).products.where("title like ?","%#{params[:srch]}%").all
+	
+	@products = Product.all
 	#where("title = ?",params[:q]).load
 	@cart = current_cart
-	render "products/index"	
+	respond_to do |format|
+		if @products
+			format.html { render "products/index"}	
+			format.json { render json: @products}			
+		end
+	end		
 	#redirect_to account_store_products_path(store_id: params[:store_id],account_id: params[:account_id])
   end
 

@@ -17,9 +17,10 @@ get "sessions/create"
  
 get "sessions/destroy"
 controller :products do
-	post "search" => :search
+	post "/search" => :search
+	
 end
-
+get "/search" => "products#search"
   resources :accounts do
 	resources :users
 	resources :stores do

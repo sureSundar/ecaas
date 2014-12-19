@@ -63,7 +63,7 @@ $('#srch').typeahead(null, {
   source: products.ttAdapter(),
   templates: {
     suggestion: Handlebars.compile(      
-	  '<div><p><b>{{title}}</b></p> <p><img src="http://localhost:3000/images/{{image_url}}" /></p><p>{{description}}</p><p>{{price}}</p><hr/></div>'
+	  '<div><p>{{title}}</p> <hr/> <p><img src="}}</p><p>{{description}}</p><p>{{price}}</p></div>'
     )
   }
 });
