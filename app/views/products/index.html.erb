@@ -1,43 +1,6 @@
+<%= render 'search' %>	    
 <h1>Listing products</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Description</th>
-      <th>Image url</th>
-      <th>Price</th>
-      <th>Store</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-
-  <tbody>
-     <tr>
-	<%= render 'search' %>	    
-     </tr>
-     <tr>
-	<%= render 'filter' %>	    
-     </tr>
-
-	<% @products.each do |product| %>
-      <tr>
-        <td><%= product.title %></td>
-        <td><%= product.description %></td>
-        <td><%= product.image_url %></td>
-        <td><%= product.price %></td>
-        <td><%= product.store %></td>
-        <td><%= link_to 'Show', account_store_product_path(id: product.id,store_id: product.store.id,account_id: product.store.account.id) %></td>
-        <td><%= link_to 'Edit', edit_account_store_product_path(id: product.id,store_id: product.store.id,account_id: product.store.account.id) %></td>
-        <td><%= link_to 'Destroy', account_store_product_path(id: product.id,store_id: product.store.id,account_id: product.store.account.id), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-		<td><%= button_to 'Add to Cart' , line_items_path(:product_id => product),:remote => true %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
+<hr/>
+<%= render 'prodlist' %> 
+<hr/>
 <%= link_to 'New Product', new_account_store_product_path(account_id: params[:account_id], store_id: params[:store_id]) %>

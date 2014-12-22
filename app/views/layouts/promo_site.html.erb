@@ -4,15 +4,15 @@
   <title>Ecaas</title>
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag "depot" , :media => "all" %>
+  <%= stylesheet_link_tag "flex" , :media => "all" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "bloodhound.min", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "typeahead.bundle.min", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "typeahead.jquery.min", "data-turbolinks-track" => true %>
   <%= javascript_include_tag "handlebars-v2.0.0", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+  <%= csrf_meta_tags %> 
 </head>
 <body>
-
 <%
 	if (session[:user_id] != nil)
 %>
@@ -20,26 +20,25 @@
 			| User 	 : <%= User.find(session[:user_id]).name %>
 			| <%= link_to 'logout', logout_path, method: :delete, data: { confirm: 'Are you sure?' } %>
 		</h4>	
-		<hr/>
 <%
-	end
+	end	
 %>
-<h3>Welcome to your Real ECAAS World</h3>
 <div>
-       <p class="notice"><%= notice %></p>
-       <p class="alert"><%= alert %></p>
+<h3>Welcome to your Real ECAAS World</h3>
+<hr/>
 </div>
-<div id="columns" >
-	<div id="side" >
-		<div id="cart" >
-		<% if @cart!=nil %>
-			<%= render @cart %>
-		<% end %>
-		</div>
-		<div id="main" >
-			<%= yield %>
-		</div>	
-	</div>
+<p class="notice"><%= notice %></p>
+<p class="alert"><%= alert %></p>
+
+<div class="flex-container">
+<div id="cart" class="flex-item">
+	<% if @cart!=nil %>
+		<%= render @cart %>
+	<% end %>
 </div>
+<div id="main" class="flex-item">
+	<%= yield %>
+</div>	
+</div> <!-- flex-container Ends here -->
 </body>
 </html>

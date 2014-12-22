@@ -6,18 +6,39 @@ class ProductsController < ApplicationController
   def index
     @products = current_account.stores.find(params[:store_id]).products.all
 	@cart = current_cart
+	session[:past_search_params] = nil
+	
   end
 
   def search
+	#session[:past_search_params] = nil
     #@products = current_account.stores.find(params[:store_id]).products.where("title like ?","%#{params[:srch]}%").all
+	@products = Product.where("title like ? or description like ?","%#{params[:q]}%","%#{params[:q]}%")
 	
-	@products = Product.all
 	#where("title = ?",params[:q]).load
 	@cart = current_cart
+	@past_json_arr = Array.new
+	
+	if (session[:past_search_params] != nil)
+		@past_search_params = session[:past_search_params]		
+	else		
+		@past_search_params=Array.new
+		session[:past_search_params] = @past_search_params
+	end
+	
+	@past_search_params.push(params[:q])
+	
+	@past_search_params.reverse.each do |srch_var|
+		@tmp_prods = Product.where("title like ? or description like ?","%#{srch_var}%","%#{srch_var}%")
+		@srch_json1 = { :srch => {:q => srch_var, :products => @tmp_prods.as_json }}				
+		@past_json_arr.push(@srch_json1)
+	end	
+	session[:past_search_params] = @past_search_params
 	respond_to do |format|
+		
 		if @products
-			format.html { render "products/index"}	
-			format.json { render json: @products}			
+			format.html {render "products/index"	}	
+			format.json {render json: @past_json_arr}
 		end
 	end		
 	#redirect_to account_store_products_path(store_id: params[:store_id],account_id: params[:account_id])

@@ -1,0 +1,21 @@
+<style type="text/css">
+div.inline { float:left; }
+.clearBoth { clear:both; }
+</style>
+	<% @products.each do |product| %>
+	
+      <div class="inline" style="{display:'block';width:100px;height:100px;border:2px;border-style:'thin solid black';">
+	  <div>	
+        <%= image_tag(product.image_url, :alt=> "#{product.title}(Rs.#{product.price})") %>
+	  </div>
+	  <div style="{display:'block';width:100px;height:100px;}">
+        <%= product.title %>(Rs.<%= product.price %>)
+	  </div>
+      <div>
+		<%= link_to 'Show', account_store_product_path(id: product.id,store_id: product.store.id,account_id: product.store.account.id) %>
+        <%= link_to 'Edit', edit_account_store_product_path(id: product.id,store_id: product.store.id,account_id: product.store.account.id) %>
+        <%= link_to 'Destroy', account_store_product_path(id: product.id,store_id: product.store.id,account_id: product.store.account.id), method: :delete, data: { confirm: 'Are you sure?' } %>
+		<%= button_to 'Add to Cart' , line_items_path(:product_id => product),:remote => true %>
+      </div>
+	  </div>
+    <% end %>

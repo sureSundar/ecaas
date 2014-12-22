@@ -1,0 +1,22 @@
+[
+<%= @past_json_arr.each.to_json do |srch| %>
+{
+"srch":{"<%=srch.q%>,
+	"products:"[
+	<%=snippet = capture do %>
+		<%=srch.products.each do |prod| %>
+			{"id":<%=prod.id%>,
+			"title":"<%=prod.title%>",
+			"description":"<%=prod.description%>",
+			"image_path":"<%=image_tag(prod.image_url)%>",
+			"price":<%=prod.price%>,
+			"form_path":"<%= button_to 'Add to Cart' , line_items_path(:product_id => product),:remote => true %>"
+			},
+		<% end %>
+	<% end %>
+	<%= snippet[0..-1].html_safe %>
+	]
+	},
+<% end %>
+},
+]

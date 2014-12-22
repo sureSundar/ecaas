@@ -39,8 +39,11 @@
       end
 
       def current_account
-        #Account.find_by_subdomain(account_subdomain)
-	Account.find_by_id(params[:account_id])
+        if (Account.find_by_subdomain(account_subdomain) != nil)
+			Account.find_by_subdomain(account_subdomain) 
+		else
+			Account.find_by_id(params[:account_id])
+		end
       end
 
       def http_protocol( use_ssl = request.ssl? )

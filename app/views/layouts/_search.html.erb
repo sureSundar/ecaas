@@ -1,11 +1,6 @@
-
-<%= javascript_tag "var AUTH_TOKEN=$('meta[name=csrf_token]').attr('content');" if protect_against_forgery? %>
-<%= javascript_tag "var AUTH_TOKEN1='test';" if protect_against_forgery? %>
-
 <style>
-
 #scrollable-dropdown-menu .tt-dropdown-menu {
-  max-width: 822px;
+  max-width: 422px;
   max-height: 550px;
   overflow-y: auto;
 }
@@ -45,8 +40,8 @@
     padding: 3px 20px;
     font-size: 18px;
     line-height: 24px;
-	
 }
+
 .tt-suggestion.tt-cursor { 
     color: #fff;
     background-color: #0097cf;
@@ -69,7 +64,7 @@ products[0]= new Bloodhound({
   queryTokenizer: Bloodhound.tokenizers.whitespace,  
   remote: '/search.json?q=%QUERY'  
 });
-/*
+
 products[1] = new Bloodhound({
   datumTokenizer: function(d) {return Bloodhound.tokenizers.whitespace(d.title);},
   queryTokenizer: Bloodhound.tokenizers.whitespace,  
@@ -87,9 +82,9 @@ products[1] = new Bloodhound({
             }
 		]
 });
-*/
+
 products[0].initialize();
-//products[1].initialize();
+products[1].initialize();
  
 $('#scrollable-dropdown-menu .typeahead').typeahead(
 	{highlight:true}, 
@@ -97,31 +92,31 @@ $('#scrollable-dropdown-menu .typeahead').typeahead(
 	  displayKey: 'title',
 	  source: products[0].ttAdapter(),
 	  templates: {
-		suggestion: Handlebars.compile('<p><h1 align="center">{{srch.q}} (Found {{srch.products.length}} items)</h1><hr/><p class="flex-container">{{#each srch.products}}<div class="flex-item"><ul><li><img src="/assets/{{image_url}}"></li><li>{{title}}</li><li>{{description}}</li></li>{{price}}</li><li><form action="/line_items?product_id={{id}}" class="button_to" data-remote="true" method="post"><input type="submit" value="Add to Cart"><input name="authenticity_token" type="hidden" value="{{AUTH_TOKEN1}}"></form></li></ul></div>{{/each}}</p></p>')		
+		suggestion: Handlebars.compile('<p class="flex-container"><h1 align="center">{{srch.q}} {{srch.products.length}} items</h1><hr/>{{#each srch.products}}<ul class="flex-item"><li><img src="/assets/{{image_url}}"></li><li>{{title}}</li><li>{{description}}</li></li>{{price}}</li><li><form action="/line_items?product_id={{id}}" class="button_to" data-remote="true" method="post"><div><input type="submit" value="Add to Cart"><input name="authenticity_token" type="hidden" value="KWaqy3wK3VeRpiiWDCDsDDoNdGxepuAAd3aPH3YlGi8="></div></form></li></ul><hr/>{{/each}}</p>')		
 	  }	
-	}/*,
+	},
 	{
 	  displayKey: 'title',
 	  source: products[1].ttAdapter(),	  
 	  templates: {
-	  
 	  header: '<b>products[1]</b>',
 		suggestion: Handlebars.compile(      
 		  '<div><p><b>{{title}}</b></p> <p><img src="http://localhost:3000/images/{{image_url}}" /></p><p>{{description}}</p><p>{{price}}</p><hr/></div>'
 		)
-	  }
-	}*/);		
+	  }	
+	});	
+	var atoken = $("meta[name=csrf_token]").attr("content");
 });
 </script>
 
 <div id="bloodhound">
 	<%= form_tag search_path do %>
-	<div id="scrollable-dropdown-menu" align="center">
+	<div id="scrollable-dropdown-menu">
 		<%= search_field_tag :srch,nil,class: 'typeahead flex-container',placeholder: 'Search here ...' %>			
 	</div>
 		<%= hidden_field_tag(:account_id, params[:account_id]) %>
 		<%= hidden_field_tag(:store_id, params[:store_id]) %>		
-	<!-- %= submit_tag 'Search',disable_with: "Searching..." % -->					
+	<%= submit_tag 'Search',disable_with: "Searching..." %>					
  </div>
 <% end %>
 
